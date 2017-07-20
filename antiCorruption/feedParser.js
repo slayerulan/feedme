@@ -22,10 +22,10 @@ const parseInput = (input) => {
     // - OR anything other than a pipe [^\\|] => [^|]
     const items = input.match(/(\\\||[^\\|])+/g);
     return {
-        msgId: items[0],
+        msgId: parseInt(items[0]),
         operation: items[1],
         type: items[2],
-        timestamp: new Date(parseInt(items[3])),
+        timestamp: parseInt(items[3]),
         body: items.slice(4,items.length)
     };
 };
@@ -41,7 +41,7 @@ const parseEvent = (packet) => {
         category: body[1],
         subCategory: body[2],
         name: body[3],
-        startTime: new Date(parseInt(body[4])),
+        startTime: parseInt(body[4]),
         displayed: body[5] == 1,
         suspended: body[6] == 1
     };
