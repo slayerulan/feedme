@@ -24,3 +24,14 @@ test('can handle multipe lines', t => {
     t.is(result[1].msgId, 2142, 'incorrect eventId on result[1]');
     t.is(result[2].msgId, 5257, 'incorrect eventId on result[2]');    
 });
+
+test('can handle trailing newline', t => {
+    // arrange
+    const input = `|2049|create|event|1500560941381|f5e8fcd3-8f20-40b3-826e-f97bf95f1423|Football|Premier League|\\|Manchester Utd\\| vs \\|Manchester City\\||1500560978604|0|1|
+`;
+    // act
+    const result = handler.handle(input);
+    // assert
+    t.is(result.length, 1, 'incorrect number of results');
+    t.is(result[0].msgId, 2049, 'incorrect eventId on result[0]');    
+});
