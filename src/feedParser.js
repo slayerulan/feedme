@@ -1,19 +1,21 @@
-export default {
-    parse: (input) => {
-        const packet = parseInput(input);
+const FeedParser = () => {};
 
-        switch (packet.type) {
-        case 'event': 
-            return parseEvent(packet);
-        case 'market':
-            return parseMarket(packet);
-        case 'outcome':
-            return parseOutcome(packet);
-        default:
-            throw new Error(`unexpected packet of type ${packet.type} found`);
-        }
+FeedParser.prototype.parse = (input) => {
+    const packet = parseInput(input);
+
+    switch (packet.type) {
+    case 'event': 
+        return parseEvent(packet);
+    case 'market':
+        return parseMarket(packet);
+    case 'outcome':
+        return parseOutcome(packet);
+    default:
+        throw new Error(`unexpected packet of type ${packet.type} found`);
     }
 };
+
+export default new FeedParser();
 
 const parseInput = (input) => {
     // using regex as input.split doesn't handle escaped characters.
