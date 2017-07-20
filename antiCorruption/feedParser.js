@@ -14,7 +14,11 @@ export default {
 };
 
 const parseInput = (input) => {
-    const items = input.match(/(\\\||[^\\\][^\\|])+/g);
+    // using regex as input.split doesn't handle escaped characters.
+    // after the many layer of escaped characters this regex breaks down as
+    // - match escaped pipes \\\| => \|
+    // - OR anything other than a pipe [^\\|] => [^|]
+    const items = input.match(/(\\\||[^\\|])+/g);
     return {
         msgId: items[0],
         operation: items[1],
