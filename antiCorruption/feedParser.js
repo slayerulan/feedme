@@ -21,13 +21,34 @@ const parseInput = (input) => {
     // - match escaped pipes \\\| => \|
     // - OR anything other than a pipe [^\\|] => [^|]
     const items = input.match(/(\\\||[^\\|])+/g);
+
     return {
-        msgId: parseInt(items[0]),
+        msgId: parseMsgId(items[0]),
         operation: items[1],
         type: items[2],
-        timestamp: parseInt(items[3]),
+        timestamp: parseTimestamp(items[3]),
         body: items.slice(4,items.length)
     };
+};
+
+const parseStartTime = (input) => {
+    return parseInteger(input, 'startTime');
+};
+
+const parseTimestamp = (input) => {
+    return parseInteger(input, 'timestamp');
+};
+
+const parseMsgId = (input) => {
+    return parseInteger(input, 'msgId');
+};
+
+const parseInteger = (input, field) => {
+    const result = parseInt(input);
+
+    if (isNaN(result)) throw new Error(`invalid format: expected ${field} to be an integer but found "${input}"`);
+
+    return result;
 };
 
 const parseEvent = (packet) => {
@@ -41,7 +62,7 @@ const parseEvent = (packet) => {
         category: body[1],
         subCategory: body[2],
         name: body[3],
-        startTime: parseInt(body[4]),
+        startTime: parseStartTime(body[4]),
         displayed: body[5] == 1,
         suspended: body[6] == 1
     };

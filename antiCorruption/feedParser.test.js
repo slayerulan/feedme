@@ -64,3 +64,33 @@ test('unknown packet throws error', t => {
     });
     t.is(error.message, 'unexpected packet of type fail found');
 });
+
+test('invalid msgId format throws error', t => {
+    // arrange
+    const input = '|fail|create|event|1500560941381|f5e8fcd3-8f20-40b3-826e-f97bf95f1423|Football|Premier League|\\|Manchester Utd\\| vs \\|Manchester City\\||1500560978604|0|1|';    
+    // assert
+    const error = t.throws(() => {
+        parser.parse(input);
+    });
+    t.is(error.message, 'invalid format: expected msgId to be an integer but found "fail"');
+});
+
+test('invalid timestamp format throws error', t => {
+    // arrange
+    const input = '|2049|create|event|fail|f5e8fcd3-8f20-40b3-826e-f97bf95f1423|Football|Premier League|\\|Manchester Utd\\| vs \\|Manchester City\\||1500560978604|0|1|';    
+    // assert
+    const error = t.throws(() => {
+        parser.parse(input);
+    });
+    t.is(error.message, 'invalid format: expected timestamp to be an integer but found "fail"');
+});
+
+test('invalid startTime format throws error', t => {
+    // arrange
+    const input = '|2049|create|event|1500560941381|f5e8fcd3-8f20-40b3-826e-f97bf95f1423|Football|Premier League|\\|Manchester Utd\\| vs \\|Manchester City\\||fail|0|1|';    
+    // assert
+    const error = t.throws(() => {
+        parser.parse(input);
+    });
+    t.is(error.message, 'invalid format: expected startTime to be an integer but found "fail"');
+});
