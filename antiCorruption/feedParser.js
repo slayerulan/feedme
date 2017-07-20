@@ -7,6 +7,8 @@ export default {
             return parseEvent(packet);
         case 'market':
             return parseMarket(packet);
+        case 'outcome':
+            return parseOutcome(packet);
         default:
             return packet;
         }
@@ -57,5 +59,21 @@ const parseMarket = (packet) => {
         name: body[2],
         displayed: body[3] == 1,
         suspended: body[4] == 1
+    };
+};
+
+const parseOutcome = (packet) => {
+    const { msgId, operation, type, timestamp, body } = packet;
+    return {
+        msgId,
+        operation,
+        type,
+        timestamp,
+        marketId: body[0],
+        outcomeId: body[1],
+        name: body[2],
+        price: body[3],
+        displayed: body[4] == 1,
+        suspended: body[5] == 1
     };
 };
