@@ -5,6 +5,8 @@ export default {
         switch (packet.type) {
         case 'event': 
             return parseEvent(packet);
+        case 'market':
+            return parseMarket(packet);
         default:
             return packet;
         }
@@ -12,8 +14,7 @@ export default {
 };
 
 const parseInput = (input) => {
-    const items = input.match(/(\\\||[^\\\][^\|])+/g);
-    console.log('items: ', items);
+    const items = input.match(/(\\\||[^\\\][^\\|])+/g);
     return {
         msgId: items[0],
         operation: items[1],
@@ -24,9 +25,6 @@ const parseInput = (input) => {
 };
 
 const parseEvent = (packet) => {
-
-    console.log(packet);
-
     const { msgId, operation, type, timestamp, body } = packet;
     return {
         msgId,
@@ -40,5 +38,20 @@ const parseEvent = (packet) => {
         startTime: new Date(parseInt(body[4])),
         displayed: body[5] == 1,
         suspended: body[6] == 1
+    };
+};
+
+const parseMarket = (packet) => {
+    const { msgId, operation, type, timestamp, body } = packet;
+    return {
+        msgId,
+        operation,
+        type,
+        timestamp,
+        eventId: body[0],
+        marketId: body[1],
+        name: body[2],
+        displayed: body[3] == 1,
+        suspended: body[4] == 1
     };
 };
