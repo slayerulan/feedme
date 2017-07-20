@@ -54,3 +54,13 @@ test('create outcome success', t => {
     t.is(outcome.displayed, true, 'outcome.displayed is invalid');
     t.is(outcome.suspended, false, 'outcome.suspended is invalid');
 });
+
+test('unknown packet throws error', t => {
+    // arrange
+    const input = '|2049|create|fail|1500560941381|XYZ|';
+    // assert
+    const error = t.throws(() => {
+        parser.parse(input);
+    });
+    t.is(error.message, 'unexpected packet of type fail found');
+});

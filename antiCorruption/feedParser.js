@@ -10,7 +10,7 @@ export default {
         case 'outcome':
             return parseOutcome(packet);
         default:
-            return packet;
+            throw new Error(`unexpected packet of type ${packet.type} found`);
         }
     }
 };
