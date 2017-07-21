@@ -1,9 +1,7 @@
 import test from 'ava';
-import './mongoAdaptor.test.helper';
+import helpers from './mongoAdaptor.test.helper';
 
 import marketAdaptor from './marketAdaptor';
-import Fixture from './models/fixtureSchema';
-
 
 test.serial('create market success (integration test)', async (t) => {
     // arrange
@@ -18,11 +16,11 @@ test.serial('create market success (integration test)', async (t) => {
         displayed: false, 
         suspended: true
     };
-    await createTestFixture(market.eventId);
+    await helpers.createTestFixture(market.eventId);
     // act
     await marketAdaptor.create(market);
     // assert
-    await Fixture.findOne({ 'eventId': market.eventId }, (err, model) => {
+    await t.context.db.models.Fixture.findOne({ 'eventId': market.eventId }, (err, model) => {
         if (err) t.fail(err.message);
         t.is(model.markets.length, 1, 'incorrect number of markets in mongo');
         t.is(model.markets[0].marketId, market.marketId);     
@@ -42,20 +40,20 @@ test.serial('update market success (integration test)', async (t) => {
         displayed: false, 
         suspended: true
     };
-    await createTestFixture(market.eventId);
+    await helpers.createTestFixture(market.eventId);
     await marketAdaptor.create(market);
     // act
     market.displayed = true;
     await marketAdaptor.update(market);
     // assert
-    await Fixture.findOne({ 'eventId': market.eventId }, (err, model) => {
+    await t.context.db.models.Fixture.findOne({ 'eventId': market.eventId }, (err, model) => {
         if (err) t.fail(err.message);
         t.is(model.markets.length, 1, 'incorrect number of markets in mongo');
         t.is(model.markets[0].displayed, true, 'model has not been updated');     
     });
 });
 
-test.serial('update market doesn\'t update other market (integration test)', async (t) => {
+test.serial('update market doesn\'t update other markets (integration test)', async (t) => {
     // arrange
     const market = {
         msgId: 2142,
@@ -68,7 +66,7 @@ test.serial('update market doesn\'t update other market (integration test)', asy
         displayed: false, 
         suspended: true
     };
-    await createTestFixture(market.eventId);
+    await helpers.createTestFixture(market.eventId);
     await marketAdaptor.create(market);
     market.marketId = 'f4ac93ff-8412-4a0b-8eb2-7ddb852f914f';
     await marketAdaptor.create(market);
@@ -76,7 +74,7 @@ test.serial('update market doesn\'t update other market (integration test)', asy
     market.displayed = true;
     await marketAdaptor.update(market);
     // assert
-    await Fixture.findOne({ 'eventId': market.eventId }, (err, model) => {
+    await t.context.db.models.Fixture.findOne({ 'eventId': market.eventId }, (err, model) => {
         if (err) t.fail(err.message);
         t.is(model.markets.length, 2, 'incorrect number of markets in mongo');
         t.is(model.markets[0].marketId, 'f4ac93ff-8412-4a0b-8eb2-7ddb852f914e', 'markets in the wrong order');     
@@ -85,18 +83,3 @@ test.serial('update market doesn\'t update other market (integration test)', asy
         t.is(model.markets[1].displayed, true, 'market has not been updated');     
     });
 });
-
-const createTestFixture = async (eventId) => {
-    const fixture = new Fixture({
-        eventId, 
-        category: 'Football', 
-        subCategory: 'Premier League', 
-        name: '\\|Manchester Utd\\| vs \\|Manchester City\\|', 
-        startTime: 1500560978604, 
-        displayed: false, 
-        suspended: true
-    });
-    await fixture.save((err) => {
-        if(err) throw err;
-    });
-};

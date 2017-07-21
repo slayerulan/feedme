@@ -2,7 +2,6 @@ import test from 'ava';
 import './mongoAdaptor.test.helper';
 
 import fixtureAdaptor from './fixtureAdaptor';
-import Fixture from './models/fixtureSchema';
 
 test.serial('save fixture success (integration test)', async (t) => {
     // arrange
@@ -22,7 +21,7 @@ test.serial('save fixture success (integration test)', async (t) => {
     // act
     await fixtureAdaptor.create(fixture);
     // assert
-    await Fixture.count({}, (err, count) => {
+    await t.context.db.models.Fixture.count({}, (err, count) => {
         if (err) t.fail(err.message);
         t.is(count, 1, 'incorrect number of records in mongo');        
     });
@@ -48,11 +47,11 @@ test.serial('update fixture success (integration test)', async (t) => {
     fixture.name = '\\|Manchester City\\| vs \\|Manchester Utd\\|';
     await fixtureAdaptor.update(fixture);
     // assert
-    await Fixture.count({}, (err, count) => {
+    await t.context.db.models.Fixture.count({}, (err, count) => {
         if (err) t.fail(err.message);
         t.is(count, 1, 'incorrect number of records in mongo');        
     });
-    await Fixture.findOne({'eventId': fixture.eventId}, (err, model) => {
+    await t.context.db.models.Fixture.findOne({'eventId': fixture.eventId}, (err, model) => {
         t.is(model.name, '\\|Manchester City\\| vs \\|Manchester Utd\\|');
     });
 });
