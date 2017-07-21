@@ -1,23 +1,21 @@
 import mongoose from 'mongoose';
 
-import fixtureAdaptor from './fixtureAdaptor';
-import marketAdaptor from './marketAdaptor';
-import outcomeAdaptor from './outcomeAdaptor';
+import fixture from './fixture';
+import market from './market';
+import outcome from './outcome';
 
 
 const connect = async (connectionString) => {
     mongoose.Promise = require('bluebird');
     mongoose.connection.on('error',function (err) {  
-        console.log('Mongoose default connection error: ' + err);
+        console.log('Mongoose default connection error: ' + err); // eslint-disable-line no-console
     });
     await mongoose.connect(connectionString, {useMongoClient: true});
-
-
 };
 
 export default {
-    fixture: fixtureAdaptor,
-    market: marketAdaptor,
-    outcome: outcomeAdaptor,
+    fixture,
+    market,
+    outcome,
     connect
 };

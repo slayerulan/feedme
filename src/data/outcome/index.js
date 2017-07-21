@@ -1,4 +1,4 @@
-import Fixture from './models/fixtureSchema';
+import Fixture from '../fixture/fixture.model';
 
 export default {
     create: async (outcome) => createOutcome(outcome),
@@ -25,7 +25,10 @@ const createOutcome = async (outcome) => {
                 displayed, 
                 suspended,
             }
-        }});
+        }}, (err) => {
+            if (err) throw err;
+            console.log(`Added outcome ${outcomeId}`); // eslint-disable-line no-console
+        });
 };
 
 const updateOutcome = async (outcome) => {
@@ -43,7 +46,12 @@ const updateOutcome = async (outcome) => {
             'markets.marketId': marketId,
             'markets.outcomes.outcomeId': outcomeId
         },
-        { $pull : { 'markets.$.outcomes' : { outcomeId } } }
+        { $pull : { 'markets.$.outcomes' : { outcomeId } }
+
+        }, (err) => {
+            if (err) throw err;
+            console.log(`Removed market ${outcomeId}`); // eslint-disable-line no-console
+        }
     );
 
     await createOutcome(outcome);

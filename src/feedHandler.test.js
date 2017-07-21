@@ -1,6 +1,5 @@
 import test from 'ava';
 import handler from './feedHandler';
-import './data/mongoAdaptor.test.helper';
 
 test.serial('can handle single line', t => {
     // arrange

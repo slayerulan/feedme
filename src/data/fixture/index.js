@@ -1,4 +1,9 @@
-import Fixture from './models/fixtureSchema';
+import Fixture from './fixture.model';
+
+export default {
+    create: async (fixture) => createFixture(fixture),
+    update: async (fixture) => updateFixture(fixture)
+};
 
 const createFixture = async (fixture) => {
     
@@ -24,6 +29,7 @@ const createFixture = async (fixture) => {
 
     await model.save((err) => {
         if(err) throw err;
+        console.log(`Created fixture ${eventId}`); // eslint-disable-line no-console
     });
 };
 
@@ -50,11 +56,7 @@ const updateFixture = async (fixture) => {
         
         model.save((err) => {
             if (err) throw err;
+            console.log(`Updated fixture ${eventId}`); // eslint-disable-line no-console
         });
     });
-};
-
-export default {
-    create: async (fixture) => createFixture(fixture),
-    update: async (fixture) => updateFixture(fixture)
 };

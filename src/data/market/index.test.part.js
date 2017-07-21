@@ -1,7 +1,7 @@
 import test from 'ava';
 
-import helpers from './mongoAdaptor.test.helper';
-import marketAdaptor from './marketAdaptor';
+import helper from '../test.helper';
+import marketAdaptor from './';
 
 test.serial('create market success (integration test)', async (t) => {
     // arrange
@@ -16,7 +16,7 @@ test.serial('create market success (integration test)', async (t) => {
         displayed: false, 
         suspended: true
     };
-    await helpers.createTestFixture(market.eventId);
+    await helper.createTestFixture(market.eventId);
     // act
     await marketAdaptor.create(market);
     // assert
@@ -40,7 +40,7 @@ test.serial('update market success (integration test)', async (t) => {
         displayed: false, 
         suspended: true
     };
-    await helpers.createTestFixture(market.eventId);
+    await helper.createTestFixture(market.eventId);
     await marketAdaptor.create(market);
     // act
     market.displayed = true;
@@ -66,7 +66,7 @@ test.serial('update market doesn\'t update other markets (integration test)', as
         displayed: false, 
         suspended: true
     };
-    await helpers.createTestFixture(market.eventId);
+    await helper.createTestFixture(market.eventId);
     await marketAdaptor.create(market);
     market.marketId = 'f4ac93ff-8412-4a0b-8eb2-7ddb852f914f';
     await marketAdaptor.create(market);

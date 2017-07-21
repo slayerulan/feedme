@@ -1,6 +1,6 @@
 import test from 'ava';
-import './mongoAdaptor.test.helper';
-import fixtureAdaptor from './fixtureAdaptor';
+import '../test.helper';
+import fixtureAdaptor from './';
 
 test.serial('save fixture success (integration test)', async (t) => {
     // arrange

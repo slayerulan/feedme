@@ -1,15 +1,15 @@
 import test from 'ava';
-import helpers from './mongoAdaptor.test.helper';
+import helper from '../test.helper';
 
-import outcomeAdaptor from './outcomeAdaptor';
+import outcomeAdaptor from './';
 
 test.serial('create outcome success (integration test)', async (t) => {
     // arrange
     const eventId = 'f3bdb437-3fbe-488c-b962-28fcac066efe';
     const marketId = 'f4ac93ff-8412-4a0b-8eb2-7ddb852f914e';
     const outcome = getTestOutcome(marketId, '05efca1f-dc68-4bc5-aec0-1e6bf5189c12');
-    await helpers.createTestFixture(eventId);
-    await helpers.createTestMarket(eventId, marketId);
+    await helper.createTestFixture(eventId);
+    await helper.createTestMarket(eventId, marketId);
     // act
 
     await outcomeAdaptor.create(outcome);
@@ -28,8 +28,8 @@ test.serial('update outcome success (integration test)', async (t) => {
     const eventId = 'f3bdb437-3fbe-488c-b962-28fcac066efe';
     const marketId = 'f4ac93ff-8412-4a0b-8eb2-7ddb852f914e';
     const outcome = getTestOutcome(marketId, '05efca1f-dc68-4bc5-aec0-1e6bf5189c12');
-    await helpers.createTestFixture(eventId);
-    await helpers.createTestMarket(eventId, marketId);
+    await helper.createTestFixture(eventId);
+    await helper.createTestMarket(eventId, marketId);
     await outcomeAdaptor.create(outcome);
     // act
     outcome.suspended = true;
@@ -49,8 +49,8 @@ test.serial('update outcome doesn\'t update other outcomes (integration test)', 
     const marketId = 'f4ac93ff-8412-4a0b-8eb2-7ddb852f914e';    
     const outcome = getTestOutcome(marketId, '05efca1f-dc68-4bc5-aec0-1e6bf5189c10');
     const outcome2 = getTestOutcome(marketId, '05efca1f-dc68-4bc5-aec0-1e6bf5189c11');
-    await helpers.createTestFixture(eventId);
-    await helpers.createTestMarket(eventId, marketId);
+    await helper.createTestFixture(eventId);
+    await helper.createTestMarket(eventId, marketId);
     await outcomeAdaptor.create(outcome);
     await outcomeAdaptor.create(outcome2);
     // act
@@ -73,16 +73,16 @@ test.serial('update outcome doesn\'t update other outcomes (integration test)', 
 test.serial('update outcome doesn\'t update other markets (integration test)', async (t) => {
     // arrange
     const eventId = 'f3bdb437-3fbe-488c-b962-28fcac066efe';
-    await helpers.createTestFixture(eventId);
+    await helper.createTestFixture(eventId);
 
     const marketId = 'f4ac93ff-8412-4a0b-8eb2-7ddb852f914e';
-    await helpers.createTestMarket(eventId, marketId);
+    await helper.createTestMarket(eventId, marketId);
     const outcome = getTestOutcome(marketId, '05efca1f-dc68-4bc5-aec0-1e6bf5189c12');
     await outcomeAdaptor.create(outcome);
 
     const marketId2 = 'f4ac93ff-8412-4a0b-8eb2-7ddb852f914f';
     const outcome2 = getTestOutcome(marketId2, '05efca1f-dc68-4bc5-aec0-1e6bf5189c13');
-    await helpers.createTestMarket(eventId, marketId2);
+    await helper.createTestMarket(eventId, marketId2);
     await outcomeAdaptor.create(outcome2);
     
     // act

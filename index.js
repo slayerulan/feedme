@@ -15,7 +15,7 @@ client.connect(8282, 'localhost', async () =>  {
 
 client.on('data', function(data) {
     console.log('Received: ' + data);
-    const parsedData = feedHandler.handle(data.toString());
+    feedHandler.handle(data.toString());
 });
 
 client.on('close', function() {

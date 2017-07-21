@@ -1,5 +1,5 @@
 import feedParser from './feedParser';
-import dataAdaptor from './data/dataAdaptor';
+import dataAdaptor from './data';
 
 export default {
     connect: async (connectionString) => {
@@ -24,7 +24,6 @@ const parseData = (data) => {
 };
 
 const handleLine = (line) => {
-    // console.log(`handling ${line.operation} for ${line.type}`);
     try {
         switch (line.type) {
         case 'event':

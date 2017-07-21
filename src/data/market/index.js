@@ -1,4 +1,4 @@
-import Fixture from './models/fixtureSchema';
+import Fixture from '../fixture/fixture.model';
 
 export default {
     create: async (market) => createMarket(market),
@@ -24,7 +24,10 @@ const createMarket = async (market) => {
                 suspended,
                 outcomes: []
             }
-        }});
+        }}, (err) => {
+            if (err) throw err;
+            console.log(`Added market ${marketId}`); // eslint-disable-line no-console       
+        });
 };
 
 const updateMarket = async (market) => {
@@ -45,5 +48,9 @@ const updateMarket = async (market) => {
             'markets.$.name': name,
             'markets.$.displayed': displayed,
             'markets.$.suspended': suspended
-        }});
+        }}, (err) => {
+            if (err) throw err;
+            console.log(`Updated market ${marketId}`); // eslint-disable-line no-console
+        }
+    );
 };
