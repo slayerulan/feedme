@@ -11,12 +11,12 @@ const fixtureSchema = new Schema({
     displayed: { type: Boolean, required: true },
     suspended: { type: Boolean, required: true },
     markets: [{
-        marketId: { type: Number, require: true, unique: true },
+        marketId: { type: String, require: true, unique: true },
         name: { type: String, required: true },
         displayed: { type: Boolean, required: true },
         suspended: { type: Boolean, required: true },
         outcomes: [{
-            outcomeId: { type: Number, require: true, unique: true },
+            outcomeId: { type: String, require: true, unique: true },
             name: { type: String, require: true },
             price: { type: String, require: true },
             displayed: { type: Boolean, required: true },

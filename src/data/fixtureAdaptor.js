@@ -1,4 +1,3 @@
-/* eslint no-console:0 */
 import Fixture from './models/fixtureSchema';
 
 // const connect = async (connectionString) => {
@@ -28,7 +27,6 @@ const createFixture = async (fixture) => {
 
     await model.save((err) => {
         if(err) throw err;
-        console.log('Fixture created');
     });
 };
 

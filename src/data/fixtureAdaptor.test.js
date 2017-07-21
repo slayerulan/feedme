@@ -1,35 +1,8 @@
 import test from 'ava';
-import mongoose from 'mongoose';
-import { MongoDBServer } from 'mongomem';
+import './mongoAdaptor.test.helper';
 
-import mongoAdaptor from './mongoAdaptor';
+import fixtureAdaptor from './fixtureAdaptor';
 import Fixture from './models/fixtureSchema';
-
-test.before('start server', async () => {
-    MongoDBServer.debug = true;
-    await MongoDBServer.start();
-});
-
-const setupMongoose = async () => {
-    const cs = await MongoDBServer.getConnectionString();
-    // return await mongoAdaptor.connect(cs);
-    await mongoose.connect(cs);
-    return mongoose;
-};
-
-test.beforeEach(async t => {
-    const db = await setupMongoose();
-    t.context.db = db;
-});
-
-test.afterEach.always(async t => {
-    const { db } = t.context;
-    await db.connection.close();
-});
-
-test.serial('db existis', (t) => {
-    t.truthy(true);
-});
 
 test.serial('save fixture success (integration test)', async (t) => {
     // arrange
@@ -47,7 +20,7 @@ test.serial('save fixture success (integration test)', async (t) => {
         suspended: true
     };
     // act
-    await mongoAdaptor.create(fixture);
+    await fixtureAdaptor.create(fixture);
     // assert
     await Fixture.count({}, (err, count) => {
         if (err) t.fail(err.message);
@@ -70,10 +43,10 @@ test.serial('update fixture success (integration test)', async (t) => {
         displayed: false, 
         suspended: true
     };
-    await mongoAdaptor.create(fixture);
+    await fixtureAdaptor.create(fixture);
     // act
     fixture.name = '\\|Manchester City\\| vs \\|Manchester Utd\\|';
-    await mongoAdaptor.update(fixture);
+    await fixtureAdaptor.update(fixture);
     // assert
     await Fixture.count({}, (err, count) => {
         if (err) t.fail(err.message);
@@ -83,5 +56,3 @@ test.serial('update fixture success (integration test)', async (t) => {
         t.is(model.name, '\\|Manchester City\\| vs \\|Manchester Utd\\|');
     });
 });
-
-test.after.always('cleanup', () => MongoDBServer.tearDown());
