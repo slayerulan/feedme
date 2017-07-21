@@ -18,9 +18,15 @@ Tested on OSX but should also run on windows.
 
 To run unit test run `npm run test` or `npm run test:watch` if you wish to run them continuously.
 
+**NOTE: Due to a bug in `mongomem` ([#2](https://github.com/CImrie/mongomem/issues/2)) port 27017 needs to be kept free for the in memory mongodb tests to run.**
+
 ### Assumptions
 
 - The tasks talk about "fixtures". I have assumed that these are synonymous with packets of type "event".
+- eventId is unique
+- marketId is unique
+- outcomeId is unique
+- all fields are always populated (null checking is not required)
 
 ### Tasks:
 
