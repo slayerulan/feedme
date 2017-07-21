@@ -10,7 +10,7 @@ test.before('start server', async () => {
 
 const setupMongoose = async () => {
     const cs = await MongoDBServer.getConnectionString();
-    mongoose.Promise = global.Promise;
+    mongoose.Promise = require('bluebird');
     await mongoose.connect(cs, {useMongoClient: true});
     return mongoose;
 };
@@ -25,7 +25,8 @@ test.afterEach.always(async t => {
     await db.connection.close();
 });
 
-test.after.always('cleanup', () => MongoDBServer.tearDown());
+// test.after.always('cleanup', () => MongoDBServer.tearDown());
+
 
 const createTestFixture = async (eventId) => {
     const fixture = new Fixture({
@@ -56,7 +57,7 @@ const createTestMarket = async (eventId, marketId) => {
         }});
 };
 
-export default { 
+export default {
     createTestFixture,
     createTestMarket
 };

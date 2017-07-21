@@ -1,6 +1,6 @@
 import test from 'ava';
-import helpers from './mongoAdaptor.test.helper';
 
+import helpers from './mongoAdaptor.test.helper';
 import marketAdaptor from './marketAdaptor';
 
 test.serial('create market success (integration test)', async (t) => {

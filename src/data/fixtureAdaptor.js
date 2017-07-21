@@ -1,10 +1,7 @@
 import Fixture from './models/fixtureSchema';
 
-// const connect = async (connectionString) => {
-//     await mongoose.connect(connectionString);
-// };
-
 const createFixture = async (fixture) => {
+    
     const { 
         eventId, 
         category, 

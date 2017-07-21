@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node index.js --presets es2015,stage-2",
+    "start": "babel-node index.js --presets es2015,es2017",
     "eslint": "./node_modules/.bin/eslint ./",
     "test": "npm run eslint && ava",
     "test:watch": "npm test -- --watch"
@@ -12,6 +12,7 @@
   "author": "Macs Dickinson",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "3.5.0",
     "mongoose": "4.11.3",
     "net": "1.0.2"
   },
