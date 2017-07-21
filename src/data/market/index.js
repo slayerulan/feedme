@@ -26,7 +26,6 @@ const createMarket = async (market) => {
             }
         }}, (err) => {
             if (err) throw err;
-            console.log(`Added market ${marketId}`); // eslint-disable-line no-console       
         });
 };
 
@@ -50,7 +49,6 @@ const updateMarket = async (market) => {
             'markets.$.suspended': suspended
         }}, (err) => {
             if (err) throw err;
-            console.log(`Updated market ${marketId}`); // eslint-disable-line no-console
         }
     );
 };

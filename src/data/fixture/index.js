@@ -29,7 +29,6 @@ const createFixture = async (fixture) => {
 
     await model.save((err) => {
         if(err) throw err;
-        console.log(`Created fixture ${eventId}`); // eslint-disable-line no-console
     });
 };
 
@@ -56,7 +55,6 @@ const updateFixture = async (fixture) => {
         
         model.save((err) => {
             if (err) throw err;
-            console.log(`Updated fixture ${eventId}`); // eslint-disable-line no-console
         });
     });
 };

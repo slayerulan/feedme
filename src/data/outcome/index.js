@@ -27,7 +27,6 @@ const createOutcome = async (outcome) => {
             }
         }}, (err) => {
             if (err) throw err;
-            console.log(`Added outcome ${outcomeId}`); // eslint-disable-line no-console
         });
 };
 
@@ -50,7 +49,6 @@ const updateOutcome = async (outcome) => {
 
         }, (err) => {
             if (err) throw err;
-            console.log(`Removed market ${outcomeId}`); // eslint-disable-line no-console
         }
     );
 
