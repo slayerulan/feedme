@@ -1,5 +1,4 @@
 import feedParser from './feedParser';
-// import dataAdaptor from './data';
 
 export default class FeedHandler {
     constructor (packetHandler) {
