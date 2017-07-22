@@ -9,7 +9,9 @@ export default class FeedHandler {
         if (!this || !this._messageQueue) throw new Error('a packet handler must be supplied to perform this operation');
 
         const result = this.parseData(data);
-        result.successful.forEach((packet) => this._messageQueue.enqueue(packet));
+
+        this._messageQueue.enqueue(result.successful);
+
         return result;
     }
 

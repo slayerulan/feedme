@@ -18,7 +18,9 @@ const RabbitAdaptor = class {
                     throw err;
                 }
                 ch.assertQueue(queue, { durable: true });
-                ch.sendToQueue(queue, new Buffer.from(JSON.stringify(data)));
+                data.forEach(function(packet) {
+                    ch.sendToQueue(queue, new Buffer.from(JSON.stringify(packet)));
+                }, this);
             });
 
             setTimeout(() => {
