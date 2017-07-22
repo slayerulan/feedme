@@ -1,15 +1,19 @@
 /* eslint no-console:0 */
 
 import net from 'net';
-import feedHandler from './src/feedHandler';
+import DataAdaptor from './src/data';
+import FeedHandler from './src/feedHandler';
 
 const connectionString = 'mongodb://localhost:27018/feedme';
 
 const client = new net.Socket();
+const packetHandler = new DataAdaptor();
+
+const feedHandler = new FeedHandler(packetHandler);
 
 client.connect(8282, 'localhost', async () =>  {
     console.log('Connected to localhost:8282');
-    await feedHandler.connect(connectionString);
+    await packetHandler.connect(connectionString);
     console.log('Connected to :' + connectionString); 
 });
 
