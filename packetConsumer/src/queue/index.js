@@ -4,22 +4,10 @@ const RabbitAdaptor = class {
     constructor(connectionString, queue) {
         this.connectionString = connectionString;
         this.queue = queue;
-
-        this.fixture = {
-            create: (data) => { this.enqueue(this.connectionString, this.queue, data, 'createFixture'); },
-            update: (data) => { this.enqueue(this.connectionString, this.queue, data, 'updateFixture'); }
-        };
-        this.market = {
-            create: (data) => { this.enqueue(this.connectionString, this.queue, data, 'createMarket'); },
-            update: (data) => { this.enqueue(this.connectionString, this.queue, data, 'updateMarket'); }
-        };
-        this.outcome = {
-            create: (data) => { this.enqueue(this.connectionString, this.queue, data, 'createOutcome'); },
-            update: (data) => { this.enqueue(this.connectionString, this.queue, data, 'updateOutcome'); }
-        };
+        this.enqueue = (data) => { this._enqueue(this.connectionString, this.queue, data); };
     }
     
-    enqueue(connectionString, queue, data, messageName) {
+    _enqueue(connectionString, queue, data) {
         amqp.connect(connectionString, (err, conn) => {
             if (err) {
                 throw err;
@@ -30,7 +18,7 @@ const RabbitAdaptor = class {
                     throw err;
                 }
                 ch.assertQueue(queue, { durable: true });
-                ch.sendToQueue(queue, new Buffer.from(JSON.stringify(data), { header: { messageName }}));
+                ch.sendToQueue(queue, new Buffer.from(JSON.stringify(data)));
             });
 
             setTimeout(() => {

@@ -1,7 +1,7 @@
 {
-  "name": "packetconsumer",
+  "name": "queueconsumer",
   "version": "1.0.0",
-  "description": "A simple node application that consumes a TCP feed and writes messages to RabbitMQ.",
+  "description": "Simple node application which consumes messages from a RabbitMQ queue and writes to MongoDB.",
   "main": "index.js",
   "scripts": {
     "start": "babel-node index.js --presets es2015,es2017",
@@ -9,26 +9,23 @@
     "test": "npm run eslint && ava",
     "test:watch": "npm test -- --watch"
   },
-  "author": "Macs Dickinson",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "amqplib": "0.5.1",
-    "bluebird": "3.5.0",
-    "net": "1.0.2"
-  },
-  "devDependencies": {
-    "ava": "0.21.0",
     "babel-cli": "6.24.1",
-    "babel-polyfill": "6.23.0",
     "babel-preset-es2015": "6.24.1",
     "babel-preset-es2017": "6.24.1",
-    "eslint": "4.2.0",
-    "sinon": "2.3.8"
+    "mongomem": "0.1.9",
+    "mongoose": "4.11.3"
+  },
+  "devDependencies": {
+    "ava": "^0.21.0",
+    "sinon": "^2.3.8"
   },
   "ava": {
     "require": [
-      "babel-register",
-      "babel-polyfill"
+      "babel-register"
     ]
   }
 }

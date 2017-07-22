@@ -1,15 +1,15 @@
 import feedParser from './feedParser';
 
 export default class FeedHandler {
-    constructor (packetHandler) {
-        this._packetHandler = packetHandler;
+    constructor (messageQueue) {
+        this._messageQueue = messageQueue;
     }
 
     handle(data) {
-        if (!this || !this._packetHandler) throw new Error('a packet handler must be supplied to perform this operation');
+        if (!this || !this._messageQueue) throw new Error('a packet handler must be supplied to perform this operation');
 
         const result = this.parseData(data);
-        result.successful.forEach((packet) => this.handleLine(packet));
+        result.successful.forEach((packet) => this._messageQueue.enqueue(packet));
         return result;
     }
 
@@ -30,40 +30,5 @@ export default class FeedHandler {
             successful,
             failed
         };
-    }
-
-    handleLine(line) {
-        try {
-            switch (line.type) {
-            case 'event':
-                this.handleOperation(line, this._packetHandler.fixture);
-                break;
-            case 'market':
-                this.handleOperation(line, this._packetHandler.market);
-                break;
-            case 'outcome':
-                this.handleOperation(line, this._packetHandler.outcome);
-                break;
-            default:
-                throw new Error(`invalid packet type: ${line.type}`);
-            }
-        }
-        catch (err) {
-            console.log(err); // eslint-disable-line no-console
-            throw err;
-        }
-    }
-
-    handleOperation (line, handler) {
-        switch (line.operation) {
-        case 'update':
-            handler.update(line);
-            break;
-        case 'create':
-            handler.create(line);
-            break;
-        default:
-            throw new Error(`invalid operation: expected create or update but found "${line.operation}"`);
-        }
     }
 }

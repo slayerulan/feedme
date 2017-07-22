@@ -27,6 +27,7 @@ const createOutcome = async (outcome) => {
             }
         }}, (err) => {
             if (err) throw err;
+            console.log(`CREATE OUTCOME ${outcomeId}`);
         });
 };
 
@@ -49,6 +50,7 @@ const updateOutcome = async (outcome) => {
 
         }, (err) => {
             if (err) throw err;
+            console.log(`UPDATE OUTCOME ${outcomeId}`);            
         }
     );
 

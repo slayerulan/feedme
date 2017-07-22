@@ -29,6 +29,7 @@ const createFixture = async (fixture) => {
 
     await model.save((err) => {
         if(err) throw err;
+        console.log(`CREATE FIXTURE ${eventId}`);
     });
 };
 
@@ -46,6 +47,8 @@ const updateFixture = async (fixture) => {
     Fixture.findOne({'eventId': eventId}, (err, model) => {
         if (err) throw err;
 
+        if (!model) throw new Error (`Update failed. No fixture exists with id ${eventId}`);
+
         model.category = category;
         model.subCategory = subCategory;
         model.name = name;
@@ -55,6 +58,7 @@ const updateFixture = async (fixture) => {
         
         model.save((err) => {
             if (err) throw err;
+            console.log(`UPDATE FIXTURE ${eventId}`);        
         });
     });
 };
