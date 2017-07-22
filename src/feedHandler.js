@@ -6,9 +6,9 @@ export default {
         await dataAdaptor.connect(connectionString);
     },
     handle: (data) => {        
-        const results = parseData(data);
-        results.forEach((line) => handleLine(line));
-        return results;
+        const result = parseData(data);
+        result.successful.forEach((line) => handleLine(line));
+        return result;
     },
     disablePersist: () => {
         this.persist = false;
@@ -16,11 +16,22 @@ export default {
 };
 
 const parseData = (data) => {
-    return data.split('\n')
+    const failed = [];
+    const successful = [];
+    data.split('\n')
         .filter((line) => line !== '')
-        .map((line) => {
-            return feedParser.parse(line);
+        .forEach((line) => {
+            try {
+                successful.push(feedParser.parse(line));
+            }
+            catch (error) {
+                failed.push({ line, error, message: error.message });
+            }
         });
+    return {
+        successful,
+        failed
+    };
 };
 
 const handleLine = (line) => {
