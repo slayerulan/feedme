@@ -4,8 +4,8 @@ import { MongoDBServer } from 'mongomem';
 
 const configure = function() {
 
-    test.before('start server', async () => {
-        // MongoDBServer.debug = debug;
+    test.before('start server', async (debug) => {
+        MongoDBServer.debug = debug;
         await MongoDBServer.start();
     });
 
@@ -26,7 +26,7 @@ const configure = function() {
         await db.connection.close();
     });
 
-    test.after.always('cleanup', () => MongoDBServer.tearDown());
+    test.after.always('cleanup', async () => await MongoDBServer.tearDown());
 };
 
 export default {

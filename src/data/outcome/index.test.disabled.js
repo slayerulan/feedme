@@ -1,7 +1,9 @@
 import test from 'ava';
 import helper from '../test.helper';
-
 import outcomeAdaptor from './';
+import inMemory from '../mongo.inmemory.helper';
+
+inMemory.configure();
 
 test.serial('create outcome success (integration test)', async (t) => {
     // arrange

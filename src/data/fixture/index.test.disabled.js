@@ -1,6 +1,9 @@
 import test from 'ava';
 import '../test.helper';
 import fixtureAdaptor from './';
+import inMemory from '../mongo.inmemory.helper';
+
+inMemory.configure();
 
 test.serial('save fixture success (integration test)', async (t) => {
     // arrange
