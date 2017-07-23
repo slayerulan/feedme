@@ -14,7 +14,7 @@ test('create event success', t => {
     t.is(event.eventId, 'f5e8fcd3-8f20-40b3-826e-f97bf95f1423', 'event.eventId is invalid');
     t.is(event.category, 'Football', 'event.category is invalid');
     t.is(event.subCategory, 'Premier League', 'event.subCategory is invalid');
-    t.is(event.name, '\\|Manchester Utd\\| vs \\|Manchester City\\|', 'event.name is invalid');
+    t.is(event.name, '|Manchester Utd| vs |Manchester City|', 'event.name is invalid');
     t.is(event.startTime, 1500560978604, 'event.startTime is invalid');
     t.is(event.displayed, false, 'event.displayed is invalid');
     t.is(event.suspended, true, 'event.suspended is invalid');
@@ -49,7 +49,7 @@ test('create outcome success', t => {
     t.is(outcome.timestamp, 1500568619618, 'outcome.timestamp invalid');
     t.is(outcome.marketId, '86397183-528f-434e-b7ff-c237dd2107a6', 'outcome.marketId is invalid');
     t.is(outcome.outcomeId, '05efca1f-dc68-4bc5-aec0-1e6bf5189c12', 'outcome.outcomeId is invalid');
-    t.is(outcome.name, '\\|Roger Federer\\| 3-1', 'outcome.name is invalid');
+    t.is(outcome.name, '|Roger Federer| 3-1', 'outcome.name is invalid');
     t.is(outcome.price, '10/3', 'outcome.price is invalid');
     t.is(outcome.displayed, true, 'outcome.displayed is invalid');
     t.is(outcome.suspended, false, 'outcome.suspended is invalid');

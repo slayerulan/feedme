@@ -45,6 +45,10 @@ const parseMsgId = (input) => {
     return parseInteger(input, 'msgId');
 };
 
+const parseString = (input) => {
+    return input ? input.replace(/\\\|/g, '|') : input;
+};
+
 const parseInteger = (input, field) => {
     const result = parseInt(input);
 
@@ -61,9 +65,9 @@ const parseEvent = (packet) => {
         type,
         timestamp,
         eventId: body[0],
-        category: body[1],
-        subCategory: body[2],
-        name: body[3],
+        category: parseString(body[1]),
+        subCategory: parseString(body[2]),
+        name: parseString(body[3]),
         startTime: parseStartTime(body[4]),
         displayed: body[5] == 1,
         suspended: body[6] == 1
@@ -79,7 +83,7 @@ const parseMarket = (packet) => {
         timestamp,
         eventId: body[0],
         marketId: body[1],
-        name: body[2],
+        name: parseString(body[2]),
         displayed: body[3] == 1,
         suspended: body[4] == 1
     };
@@ -94,8 +98,8 @@ const parseOutcome = (packet) => {
         timestamp,
         marketId: body[0],
         outcomeId: body[1],
-        name: body[2],
-        price: body[3],
+        name: parseString(body[2]),
+        price: parseString(body[3]),
         displayed: body[4] == 1,
         suspended: body[5] == 1
     };
