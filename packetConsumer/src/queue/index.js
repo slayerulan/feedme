@@ -4,7 +4,7 @@ const RabbitAdaptor = class {
     constructor(connectionString, queue) {
         this.connectionString = connectionString;
         this.queue = queue;
-        this.enqueue = (data) => { this._enqueue(this.connectionString, this.queue, data); };
+        this.enqueue = (data, queue) => { this._enqueue(this.connectionString, queue || this.queue, data); };
     }
     
     _enqueue(connectionString, queue, data) {

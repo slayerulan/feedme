@@ -10,7 +10,8 @@ export default class FeedHandler {
 
         const result = this.parseData(data);
 
-        this._messageQueue.enqueue(result.successful);
+        if (result.successful.length > 0) this._messageQueue.enqueue(result.successful);
+        if (result.failed.length > 0) this._messageQueue.enqueue(result.failed, 'feedme.failed');
 
         return result;
     }

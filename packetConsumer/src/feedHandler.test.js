@@ -68,5 +68,5 @@ test('invalid lines don\'t prevent other lines from processing', t => {
     t.is(result.successful[0].msgId, 2050, 'incorrect eventId on result[0]');
     t.is(result.failed[0].line, '|2049|create|event|15005609413', 'incorrect eventId on result[0]');
     t.is(result.failed[0].message, 'invalid format: expected startTime to be an integer but found "undefined"', 'incorrect eventId on result[0]');
-    t.is(mockPacketHandler.enqueue.callCount, 1);
+    t.is(mockPacketHandler.enqueue.callCount, 2);
 });
