@@ -1,0 +1,25 @@
+.content-head h1 {
+    color: #0d2d6c;
+    font-size: 28px;
+    line-height: 1.25;
+}
+    h1+.sub-head {
+        margin-top: -14px;
+    }
+
+h2.sub-head {
+    color: #d92231;
+    font-size: 18px;
+}
+
+h2 {
+    line-height: 1.16667;
+}
+
+h1, h2 {
+    font-family: SkyMedium,Arial,sans-serif;
+    font-weight: 400;
+    margin: 0;
+    text-align: left;
+    margin-bottom: 14px;
+}

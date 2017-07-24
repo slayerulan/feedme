@@ -1,0 +1,24 @@
+.market_section {
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.section-head {
+    padding: 0 7px;
+    margin: 0;
+    margin-bottom: 5px;
+    line-height: 2.153;
+    border: 1px solid #abb7cd;
+    border-bottom-width: 0;
+    background-color: #cad6e7;
+    color: #07073d;
+    font-size: 13px;
+    font-weight: 700;
+}
+    .section-head:before {
+        content: "";
+        display: table;
+    }
+    .section-head:after {
+        clear: both;
+    }

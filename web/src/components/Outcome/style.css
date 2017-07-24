@@ -1,0 +1,13 @@
+.oc {
+    line-height: inherit;
+    display: inline-block;
+    padding: 6px 7px 5px;
+    margin: 0 -7px;
+    text-align: left;
+    width: 50%;
+}
+    .odds {
+        color: #d92231;
+        float: right;
+        margin-right: 10px;
+    }

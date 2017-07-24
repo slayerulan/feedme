@@ -1,0 +1,27 @@
+#footer {
+    color: #bfced3;
+    background: url(//st1.skybet.com/static/sportsbook/img/css/footer/grad.png) left top repeat-x;
+    background-image: -webkit-linear-gradient(top,rgba(0,2,27,0)0,#00021b 30%,#00021b 100%);
+    margin-top: -15px;
+    padding: 100px 0 14px;
+    z-index: 0;
+}
+    #footer p {
+        font-size: 11px;
+        margin-bottom: 14px;
+        line-height: 1.272;
+    }
+
+.wrapper {
+    margin: 0 auto;
+    max-width: 998px;
+}
+    
+#copyright {
+    padding-left: 14px;
+    clear: both;
+}
+
+#site-clock {
+    float: right;
+}
