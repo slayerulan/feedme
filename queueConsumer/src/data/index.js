@@ -17,7 +17,15 @@ const DataAdaptor = class {
         mongoose.connection.on('error',function (err) {  
             console.log('Mongoose default connection error: ' + err); // eslint-disable-line no-console
         });
-        await mongoose.connect(connectionString, {useMongoClient: true});
+        await mongoose.connect(connectionString, {useMongoClient: true}, (err) => {
+            if (err) {
+                console.log(`Failed to connect to ${connectionString}. Retrying...`); // eslint-disable-line no-console
+                this.connect(connectionString);
+            }
+            else {
+                console.log(`Connection established with ${connectionString}.`); // eslint-disable-line no-console
+            }
+        });
     }
 };
 
