@@ -25,7 +25,8 @@ class FixtureListItem extends React.Component {
     };
 }
 const formatName = (name) => {
-  return name.replace(/\|/g, '');
+    if (!name) return '';
+    return name.replace(/\|/g, '');
 }
 const formatTime = (time) => {
   return moment(time).format('hh:mm:ss');

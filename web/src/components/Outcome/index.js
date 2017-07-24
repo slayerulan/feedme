@@ -11,6 +11,7 @@ class Outcome extends Component {
     }
 }
 const formatName = (name) => {
-  return name.replace(/\|/g, '');
+    if (!name) return '';
+    return name.replace(/\|/g, '');
 }
 export default Outcome;

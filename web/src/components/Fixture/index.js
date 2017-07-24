@@ -9,10 +9,12 @@ class Fixture extends Component {
     super(props);
     const { id } = this.props.match.params;
     this.state = { id };
+  }
+  componentWillMount() {
     this.refresh = setTimeout(() => {
-      props.getFixture(id);
+      this.props.getFixture(this.state.id);
     }, 1000);
-    props.getFixture(id);
+    this.props.getFixture(this.state.id);
   }
   componentWillUnmount(){
     clearInterval(this.refresh);

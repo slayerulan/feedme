@@ -5,7 +5,8 @@ import { getUpcomingFixtures, fixturesSelector, getIsFetching } from '../../modu
 
 const mapStateToProps = (state) => ({
     fixtures: fixturesSelector(state),
-    isFetching: getIsFetching(state)
+    isFetching: getIsFetching(state),
+    title: 'Forthcoming Events'
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

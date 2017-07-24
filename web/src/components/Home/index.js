@@ -4,21 +4,20 @@ import FixtureListItem from '../../components/FixtureListItem'
 import './style.css';
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
+  componentWillMount () {
     this.refresh = setInterval(() => {
-      props.getFixtures();
+      this.props.getFixtures();
     }, 1000);
-    props.getFixtures();
+    this.props.getFixtures();
   }
   componentWillUnmount(){
     clearInterval(this.refresh);
   }
   render() {
-    const { fixtures, isFetching } = this.props;
+    const { fixtures, isFetching, title } = this.props;
     return (
       <div className="page">
-        <h2 className="banner">Forthcoming Events {renderLoadingIcon(isFetching)}</h2>
+        <h2 className="banner">{title} {renderLoadingIcon(isFetching)}</h2>
         {renderFixturesList(fixtures, isFetching)}
       </div>
     );
@@ -33,7 +32,7 @@ const renderLoadingIcon = (isFetching) => {
 const renderFixturesList = (fixtures, isFetching)  =>{
 
   if (!fixtures || fixtures.length === 0)
-    return <p> No Upcoming Fixtures </p>;
+    return <p> No Fixtures </p>;
 
   const fixtureList = fixtures.map((fixture) => {
     return <FixtureListItem key={fixture.eventId} {...fixture} />;

@@ -5,7 +5,8 @@ import { getAllFixtures, fixturesSelector, getIsFetching } from '../../modules/f
 
 const mapStateToProps = (state) => ({
     fixtures: fixturesSelector(state),
-    isFetching: getIsFetching(state)
+    isFetching: getIsFetching(state),
+    title: 'All Events'
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
