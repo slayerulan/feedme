@@ -24,8 +24,7 @@ services:
 
   feedme-web:
     container_name: "feedme_web_1"
-    build:
-      context: ./web
+    build: ./web
     depends_on:
       - mongo
     environment:
@@ -35,13 +34,11 @@ services:
     ports:
       - '3000:3000'
     volumes:
-      - .:/usr/src/app
-      - ./web:/usr/src/app
+      - /node_modules
 
   feedme-queueconsumer:
     container_name: "feedme_queueConsumer_1"
-    build:
-      context: ./queueConsumer
+    build: ./queueConsumer
     depends_on:
       - mongo
       - rabbitmq
@@ -51,13 +48,11 @@ services:
       RABBIT_URL: 'amqp://rabbitmq:rabbitmq@rabbitmq:5672//feedme'
       RABBIT_QUEUE: 'feedme.all'
     volumes:
-      - .:/usr/src/app
-      - ./queueConsumer:/usr/src/app
+      - /node_modules
 
   feedme-packetconsumer:
     container_name: "feedme_packetConsumer_1"
-    build:
-      context: ./packetConsumer
+    build: ./packetConsumer
     depends_on:
       - provider
       - rabbitmq
@@ -68,5 +63,5 @@ services:
       PROVIDER_PORT: 8282
       PROVIDER_HOST: 'provider'
     volumes:
-      - .:/usr/src/app
-      - ./packetConsumer:/usr/src/app
+      - /node_modules
+      
