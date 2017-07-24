@@ -14,3 +14,9 @@ services:
        RABBITMQ_DEFAULT_PASS: "rabbitmq"
        RABBITMQ_DEFAULT_USER: "rabbitmq"
        RABBITMQ_DEFAULT_VHOST: "/feedme"
+
+  provider:
+      image: sbgfeedme/provider:latest
+      ports:
+        - "8181:8181"
+        - "8282:8282"
