@@ -26,8 +26,6 @@ const createMarket = async (market) => {
             }
         }}, (err) => {
             if (err) throw err;
-
-            console.log(`CREATE MARKET ${marketId}`);
         });
 };
 
@@ -51,7 +49,6 @@ const updateMarket = async (market) => {
             'markets.$.suspended': suspended
         }}, (err) => {
             if (err) throw err;
-            console.log(`UPDATE MARKET ${marketId}`);            
         }
     );
 };

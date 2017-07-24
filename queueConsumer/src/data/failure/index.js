@@ -18,6 +18,6 @@ const createFailure = async (failure) => {
 
     await model.save((err) => {
         if(err) throw err;
-        console.log(`CREATE FAILURE ${message}`);
+        console.log(`CREATE FAILURE ${message}`); // eslint-disable-line no-console
     });
 };

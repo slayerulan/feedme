@@ -10,6 +10,7 @@ const createOutcome = async (outcome) => {
         marketId,
         outcomeId,
         name,
+        price,
         displayed, 
         suspended
     } = outcome;
@@ -22,12 +23,12 @@ const createOutcome = async (outcome) => {
             'markets.$.outcomes': {  
                 outcomeId,
                 name,
+                price,
                 displayed, 
                 suspended,
             }
         }}, (err) => {
             if (err) throw err;
-            console.log(`CREATE OUTCOME ${outcomeId}`);
         });
 };
 
@@ -50,7 +51,6 @@ const updateOutcome = async (outcome) => {
 
         }, (err) => {
             if (err) throw err;
-            console.log(`UPDATE OUTCOME ${outcomeId}`);            
         }
     );
 
