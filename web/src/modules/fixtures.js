@@ -39,7 +39,7 @@ export const getAllFixtures = () => {
             type: GET_FIXTURES_REQUESTED
         });
 
-        axios.get('/api/fixture/all')
+        axios.get('/api/fixtures/all')
         .then((response) => {
             dispatch({
                 type: GET_FIXTURES_SUCCESS,
@@ -54,7 +54,7 @@ export const getUpcomingFixtures = () => {
             type: GET_FIXTURES_REQUESTED
         });
 
-        axios.get('/api/fixture/upcoming')
+        axios.get('/api/fixtures/upcoming')
         .then((response) => {
             dispatch({
                 type: GET_FIXTURES_SUCCESS,
