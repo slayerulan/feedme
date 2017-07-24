@@ -83,3 +83,5 @@ To run unit test run `npm run test` or `npm run test:watch` if you wish to run t
  - Mongo readonly replica - as the website only reads the data it could read from a replica to decrease load on the main mongo instance.
  - Update web app to use websockets instead of polling.
  - Failures are logged to mongo but could easily be surfaced through the web app for ease of use.
+ - Update UI to not render fixtures, markets or outcomes with `displayed` set to `false` or `suspended` set to `true`. In testing this looked to me most of the data so I removed the check to better test the app.
+ - Move `fixture.model.js` into a shared resource. Currently there is duplication.
