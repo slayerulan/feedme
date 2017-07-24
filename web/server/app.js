@@ -1,21 +1,13 @@
 import express from 'express';
 import path from 'path';
-import mongoose from 'mongoose';
 import fixtures from './routes/fixture.routes';
+import { connect } from './mongo';
 const app = express();
 
-const mongoURL = 'mongodb://localhost:27017/feedme';
-
-// Set native promises as mongoose promise
-mongoose.Promise = global.Promise;
+const mongoURL = process.env.MONGO_URL || 'mongodb://localhost:27017/feedme';
 
 // MongoDB Connection
-mongoose.connect(mongoURL, (error) => {
-  if (error) {
-    console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
-    throw error;
-  }
-});
+connect(mongoURL);
 
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
